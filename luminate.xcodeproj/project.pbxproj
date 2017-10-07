@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF272E3B1F89872100254AD1 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF272E3A1F89872100254AD1 /* RoundButton.swift */; };
+		AF272E3D1F898AF600254AD1 /* UIGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF272E3C1F898AF600254AD1 /* UIGradientView.swift */; };
 		AF9E05B91F88818900BE2B9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9E05B81F88818900BE2B9F /* AppDelegate.swift */; };
 		AF9E05BB1F88818900BE2B9F /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = AF9E05BA1F88818900BE2B9F /* art.scnassets */; };
 		AF9E05BD1F88818900BE2B9F /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9E05BC1F88818900BE2B9F /* ARViewController.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AF272E3A1F89872100254AD1 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoundButton.swift; path = UIComponents/RoundButton.swift; sourceTree = "<group>"; };
+		AF272E3C1F898AF600254AD1 /* UIGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIGradientView.swift; path = luminate/UIComponents/UIGradientView.swift; sourceTree = "<group>"; };
 		AF9E05B51F88818900BE2B9F /* luminate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = luminate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF9E05B81F88818900BE2B9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF9E05BA1F88818900BE2B9F /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -44,6 +48,7 @@
 		AF9E05AC1F88818900BE2B9F = {
 			isa = PBXGroup;
 			children = (
+				AF272E3C1F898AF600254AD1 /* UIGradientView.swift */,
 				AF9E05B71F88818900BE2B9F /* luminate */,
 				AF9E05B61F88818900BE2B9F /* Products */,
 			);
@@ -69,6 +74,7 @@
 				AF9E05BA1F88818900BE2B9F /* art.scnassets */,
 				AF9E05C11F88818900BE2B9F /* Assets.xcassets */,
 				AF9E05C61F88818900BE2B9F /* Info.plist */,
+				AF272E3A1F89872100254AD1 /* RoundButton.swift */,
 			);
 			path = luminate;
 			sourceTree = "<group>";
@@ -155,8 +161,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF272E3B1F89872100254AD1 /* RoundButton.swift in Sources */,
 				AF9E05BD1F88818900BE2B9F /* ARViewController.swift in Sources */,
 				C42ECC291F89267D00A55B2C /* Extensions.swift in Sources */,
+				AF272E3D1F898AF600254AD1 /* UIGradientView.swift in Sources */,
 				AF9E05B91F88818900BE2B9F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
