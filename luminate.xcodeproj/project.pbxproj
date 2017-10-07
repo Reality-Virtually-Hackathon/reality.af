@@ -14,6 +14,7 @@
 		AF9E05C21F88818900BE2B9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF9E05C11F88818900BE2B9F /* Assets.xcassets */; };
 		AF9E05C51F88818900BE2B9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF9E05C31F88818900BE2B9F /* LaunchScreen.storyboard */; };
 		AF9E05D21F888F6500BE2B9F /* onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF9E05D11F888F6500BE2B9F /* onboarding.storyboard */; };
+		C42ECC291F89267D00A55B2C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42ECC281F89267D00A55B2C /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		AF9E05C41F88818900BE2B9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF9E05C61F88818900BE2B9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF9E05D11F888F6500BE2B9F /* onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = onboarding.storyboard; sourceTree = "<group>"; };
+		C42ECC281F89267D00A55B2C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				AF9E05B81F88818900BE2B9F /* AppDelegate.swift */,
 				AF9E05BA1F88818900BE2B9F /* art.scnassets */,
 				AF9E05BC1F88818900BE2B9F /* ARViewController.swift */,
+				C42ECC281F89267D00A55B2C /* Extensions.swift */,
 				AF9E05CE1F888CA400BE2B9F /* Onboarding */,
 				AF9E05BE1F88818900BE2B9F /* Main.storyboard */,
 				AF9E05C11F88818900BE2B9F /* Assets.xcassets */,
@@ -153,6 +156,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF9E05BD1F88818900BE2B9F /* ARViewController.swift in Sources */,
+				C42ECC291F89267D00A55B2C /* Extensions.swift in Sources */,
 				AF9E05B91F88818900BE2B9F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
