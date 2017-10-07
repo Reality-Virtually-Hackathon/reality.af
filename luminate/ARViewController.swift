@@ -63,6 +63,11 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
         // Set the scene to the view
         self.sceneView.scene = scene
         sceneView.isPlaying = true
+        
+//        let gaussianBlurFilter = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius": 2.0])
+//        gaussianBlurFilter?.name = "blur"
+//        let bloomFilter = CIFilter(name: "CIBloom", withInputParameters: ["inputIntensity": 0.1])
+//        sceneView.scene.rootNode.filters = [gaussianBlurFilter!]
     }
     
     func setupSession() {
@@ -94,35 +99,51 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
 
         self.sceneView.scene.physicsWorld.gravity = SCNVector3Make(0.0, 0.0, 0.0)
         
+//        let model = nodeWithFile(path: "art.scnassets/sphere1.dae")
+//        model.position = SCNVector3Make(0.0, 0.0, 0.0)
+//        model.scale = SCNVector3Make(2.0, 2.0, 2.0)
+//        self.sceneView.scene.rootNode.addChildNode(model)
+        
         var angle: Float = 0.0
         let angleInc: Float = Float.pi / Float(geometries.count)
         
-        for i in 0 ..< geometries.count {
+        for _ in 0 ..< geometries.count {
             let radius: Float = Float.random(min: 0.5, max: 2.5)
             let phi: Float = Float.random(min: 0.5, max: 5)
             let theta: Float = Float.random(min: 0.5, max: 5)
- 
+
             let parentOrb = SCNSphere(radius: CGFloat(Float.random(min: 0.05, max: 0.08)))
             parentOrb.firstMaterial?.diffuse.contents = UIColor(white: 1.0, alpha: CGFloat(Float.random(min: 0.4, max: 0.6)))
+            parentOrb.firstMaterial?.emission.contents = UIColor(white: 1.0, alpha: 1.0)
             
+            parentOrb.firstMaterial?.shaderModifiers = [
+                SCNShaderModifierEntryPoint.surface: "vec4 modelNormal = scn_frame.inverseViewTransform * vec4(_surface.normal, 1.0); float threshold = 0.9; float alphaKey = step(threshold, modelNormal.z) + step(-threshold, -modelNormal.z) * modelNormal.z * modelNormal.z; _surface.diffuse.a = alphaKey;"
+            ]
+
             let childOrb = SCNSphere(radius: CGFloat(Float.random(min: 0.03, max: 0.04)))
             childOrb.firstMaterial?.diffuse.contents = UIColor(white: 1.0, alpha: 1.0)
             childOrb.firstMaterial?.emission.contents = UIColor(white: 1.0, alpha: 1.0)
+            childOrb.firstMaterial?.selfIllumination.contents = UIColor(white: 1.0, alpha: 1.0)
             
             
+            let glow = SCNLight()
+            glow.type = SCNLight.LightType.omni
+            glow.color = UIColor(red: 0.0, green: 0.0, blue: 0.45, alpha: 1.0)
+
+
             let node = SCNNode(geometry: parentOrb)
             let child = SCNNode(geometry: childOrb)
-            node.addChildNode(child)
-            
-            
+//            node.addChildNode(child)
+            node.light = glow
+
             let displacement: Float = 0.025
             let up = SCNAction.moveBy(x: 0.0, y: CGFloat(displacement), z: 0.0, duration: 5.0)
             let down = SCNAction.moveBy(x: 0.0, y: CGFloat(-displacement), z: 0.0, duration: 5.0)
-            
+
             let oscillation = SCNAction.repeatForever(SCNAction.sequence([up, down]))
             let rotation = SCNAction.repeatForever(SCNAction.rotateBy(x: 1, y: 1, z: 1, duration: 10))
             let actions = SCNAction.group([oscillation, rotation])
-            
+
             node.runAction(actions)
             node.scale = SCNVector3Make(0.5, 0.5, 0.5)
             node.position = SCNVector3Make(
@@ -130,7 +151,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
                 radius * sin(theta) * sin(phi),
                 radius * cos(theta)
             )
-            
+
             self.sceneView.scene.rootNode.addChildNode(node)
             angle += angleInc
         }
@@ -177,5 +198,15 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
+    }
+    
+    func nodeWithFile(path: String) -> SCNNode {
+        if let scene = SCNScene(named: path) {
+            let node = scene.rootNode.childNodes[0] as SCNNode
+            return node
+        } else {
+            print("Invalid path supplied")
+            return SCNNode()
+        }
     }
 }
