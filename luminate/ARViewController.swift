@@ -52,11 +52,17 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
                 self.currentLocation = placemarks?.first?.locality
                 print(self.currentLocation)
                 
-                if self.isGiving {
-                    self.setupLumenCast()
-                } else {
+                if self.isGiving == nil {
                     self.bindDataObserver()
+                } else {
+                    self.setupLumenCast()
                 }
+                
+//                if self.isGiving {
+//                    self.setupLumenCast()
+//                } else {
+//                    self.bindDataObserver()
+//                }
             }
         }
     }
@@ -130,16 +136,6 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
         self.view.addSubview(detailView)
         hideDetails()
         detailView.anchor(self.view.topAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-        
-        let infoIcon: UIButton = {
-            let view = UIButton()
-            view.setImage(UIImage(named: "info"), for: .normal)
-            view.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
-            return view
-        }()
-        
-        self.view.addSubview(infoIcon)
-        infoIcon.anchor(self.view.topAnchor, left: nil, bottom: nil, right: self.view.rightAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 12, widthConstant: 0, heightConstant: 0)
     }
     
     func bindDataObserver() {
@@ -163,16 +159,16 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
     @objc func handleTapFrom(recognizer: UITapGestureRecognizer) {
         let result = self.sceneView.hitTest(recognizer.location(in: self.sceneView), options: [SCNHitTestOption.sortResults : true])
         
-        print(result.description)
-        if isGiving {
-            self.ref.child(self.currentLocation).childByAutoId().setValue([
-                "username": "prayash",
-                "donation": "$20",
-                "message": "One love."
-            ])
-        } else {
-
-        }
+//        print(result.description)
+//        if self.isGiving {
+//            self.ref.child(self.currentLocation).childByAutoId().setValue([
+//                "username": "prayash",
+//                "donation": "$20",
+//                "message": "One love."
+//            ])
+//        } else {
+//
+//        }
     
 //        if !result.isEmpty {
 //            displayDetails()
