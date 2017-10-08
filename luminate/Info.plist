@@ -44,5 +44,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Luminate needs your location to deliver the right experience.</string>
 </dict>
 </plist>

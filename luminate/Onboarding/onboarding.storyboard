@@ -76,7 +76,7 @@
                                 <rect key="frame" x="0.0" y="-9" width="375" height="687"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="info" translatesAutoresizingMaskIntoConstraints="NO" id="Evq-8C-GAN">
-                                <rect key="frame" x="329" y="19" width="25" height="25"/>
+                                <rect key="frame" x="329" y="19" width="25" height="24.5"/>
                                 <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Coq-ve-29I">
@@ -279,7 +279,7 @@ only light can do that.</string>
         <!--JoinCauseViewController-->
         <scene sceneID="apW-C9-GO7">
             <objects>
-                <viewController storyboardIdentifier="JoinCauseOnboardingViewController" title="JoinCauseViewController" modalTransitionStyle="crossDissolve" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BMc-dZ-Kak" customClass="JoinCauseViewController" customModule="luminate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JoinCauseOnboardingViewController" title="JoinCauseViewController" modalTransitionStyle="crossDissolve" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BMc-dZ-Kak" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BXP-Wd-xKY" customClass="GradientView" customModule="luminate" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -331,7 +331,7 @@ only light can do that.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="WhiteBackArrowIcon" translatesAutoresizingMaskIntoConstraints="NO" id="m8F-vb-0hV">
-                                <rect key="frame" x="16" y="20" width="24" height="30"/>
+                                <rect key="frame" x="16" y="20" width="24" height="29.5"/>
                                 <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Vv-Vp-F70">
@@ -399,7 +399,7 @@ only light can do that.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="WhiteBackArrowIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ZB0-gl-rjp">
-                                <rect key="frame" x="16" y="20" width="24" height="30"/>
+                                <rect key="frame" x="16" y="33.5" width="24" height="33.5"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View your donation and others in an interactive landscape that celebrates what makes us human—compassion." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFZ-zp-YtF">
@@ -424,7 +424,7 @@ only light can do that.</string>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQV-p3-aT9">
-                                <rect key="frame" x="6" y="13" width="44" height="44"/>
+                                <rect key="frame" x="6" y="33.5" width="44" height="33.5"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <state key="normal" title=" "/>
                                 <connections>
@@ -684,10 +684,10 @@ only light can do that.</string>
             </objects>
             <point key="canvasLocation" x="2605.5999999999999" y="623.83808095952031"/>
         </scene>
-        <!--View Controller-->
+        <!--Donate View Controller-->
         <scene sceneID="5rd-mE-y2b">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" id="Fot-JA-7pf" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" id="Fot-JA-7pf" customClass="DonateViewController" customModule="luminate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Y6e-sm-tAc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -724,7 +724,8 @@ only light can do that.</string>
                                     <constraint firstAttribute="height" constant="82" id="uma-hP-7aW"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="sSN-3y-LOk" kind="show" id="Y2T-Fb-vfa"/>
+                                    <action selector="castButtonDidTouch:" destination="Fot-JA-7pf" eventType="touchUpInside" id="BZs-4U-Cru"/>
+                                    <segue destination="pUG-Hn-3vh" kind="show" id="IFH-5D-fcs"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -749,10 +750,21 @@ only light can do that.</string>
                         <viewLayoutGuide key="safeArea" id="F3q-7B-wPf"/>
                     </view>
                     <navigationItem key="navigationItem" id="5Wz-J3-ymC"/>
+                    <connections>
+                        <outlet property="castButton" destination="H2f-vA-dn0" id="DB1-uL-A7w"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qCy-88-w4w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3385" y="624"/>
+        </scene>
+        <!--ARScene-->
+        <scene sceneID="4lx-ho-S3I">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" bundleIdentifier="com.reality.af.luminate" referencedIdentifier="ARScene" id="pUG-Hn-3vh" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nF7-Ni-7S0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4394" y="607"/>
         </scene>
         <!--CastLanternExampleViewController-->
         <scene sceneID="QmT-Ho-g5e">
@@ -763,7 +775,7 @@ only light can do that.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swing your phone to cast lantern" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3F-tK-C0M">
-                                <rect key="frame" x="49" y="571" width="278" height="90"/>
+                                <rect key="frame" x="49" y="571" width="277" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="Axt-sK-mQM"/>
                                 </constraints>
@@ -775,7 +787,7 @@ only light can do that.</string>
                                 <rect key="frame" x="5" y="246" width="408" height="218"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cast your Lantern" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kT6-Q2-Swk">
-                                <rect key="frame" x="50" y="563" width="277" height="41"/>
+                                <rect key="frame" x="50" y="563" width="276" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="5gJ-03-R3W"/>
                                 </constraints>
@@ -784,7 +796,7 @@ only light can do that.</string>
                                 <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ExtraLargeGreenLumen" translatesAutoresizingMaskIntoConstraints="NO" id="eoQ-o4-3wO">
-                                <rect key="frame" x="-43" y="157" width="463" height="192"/>
+                                <rect key="frame" x="-43.5" y="157" width="463" height="192"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="192" id="14T-de-QBR"/>
                                 </constraints>
@@ -832,14 +844,6 @@ only light can do that.</string>
             </objects>
             <point key="canvasLocation" x="4238" y="-259"/>
         </scene>
-        <!--ARScene-->
-        <scene sceneID="ym1-FS-jdr">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="ARScene" storyboardName="Main" bundleIdentifier="com.reality.af.luminate" referencedIdentifier="ARScene" id="sSN-3y-LOk" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zic-l0-7eH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5074" y="623"/>
-        </scene>
     </scenes>
     <resources>
         <image name="CloseIcon" width="26" height="26"/>
@@ -857,9 +861,9 @@ only light can do that.</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="r9g-lK-xS8"/>
-        <segue reference="NQW-lj-2d9"/>
-        <segue reference="r7q-Ko-7sM"/>
-        <segue reference="hPD-rc-kpd"/>
-        <segue reference="Op4-R6-aNg"/>
+        <segue reference="iLr-Ea-QA0"/>
+        <segue reference="JGM-6P-axl"/>
+        <segue reference="ELl-Ur-vBv"/>
+        <segue reference="Ql7-3J-xbV"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -1,0 +1,24 @@
+<svg width="50" height="50" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>INFO</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-19676 -7789)">
+<g id="INFO">
+<g id="i">
+<use xlink:href="#path0_fill" transform="translate(19698.4 7804)" fill="#FFFFFF"/>
+</g>
+<g id="Ellipse 13">
+<mask id="mask0_outline_ins">
+<use xlink:href="#path1_fill" fill="white" transform="translate(19676 7789)"/>
+</mask>
+<g mask="url(#mask0_outline_ins)">
+<use xlink:href="#path2_stroke_2x" transform="translate(19676 7789)" fill="#FFFFFF"/>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 2.33143 4.032C 0.777144 4.032 0 3.36457 0 2.02971C 0 0.676571 0.777144 0 2.33143 0C 3.88572 0 4.66285 0.676571 4.66285 2.02971C 4.66285 3.36457 3.88572 4.032 2.33143 4.032ZM 4.19658 19.7211L 0.438851 19.7211L 0.438851 6.00686L 4.19658 6.00686L 4.19658 19.7211Z"/>
+<path id="path1_fill" d="M 50 25C 50 38.8071 38.8071 50 25 50C 11.1929 50 0 38.8071 0 25C 0 11.1929 11.1929 0 25 0C 38.8071 0 50 11.1929 50 25Z"/>
+<path id="path2_stroke_2x" d="M 46 25C 46 36.598 36.598 46 25 46L 25 54C 41.0163 54 54 41.0163 54 25L 46 25ZM 25 46C 13.402 46 4 36.598 4 25L -4 25C -4 41.0163 8.98374 54 25 54L 25 46ZM 4 25C 4 13.402 13.402 4 25 4L 25 -4C 8.98374 -4 -4 8.98374 -4 25L 4 25ZM 25 4C 36.598 4 46 13.402 46 25L 54 25C 54 8.98374 41.0163 -4 25 -4L 25 4Z"/>
+</defs>
+</svg>

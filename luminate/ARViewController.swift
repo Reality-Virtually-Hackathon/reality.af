@@ -9,17 +9,27 @@
 import UIKit
 import ARKit
 import SceneKit
+import CoreLocation
+import Firebase
+import FirebaseDatabase
 
 class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDelegate, UIGestureRecognizerDelegate {
-
-    @IBOutlet var sceneView: ARSCNView!
     
-    var geometries = [SCNSphere(radius: 0.05),
-                      SCNPlane(width: 0.05, height: 0.05),
-                      SCNBox(width: 0.05, height: 0.05, length: 0.05, chamferRadius: 0.0025),
-                      SCNPyramid(width: 0.01, height: 0.01, length: 0.01),
-                      SCNBox(width: 0.25, height: 0.1, length: 0.1, chamferRadius: 0.0),
-                      SCNPyramid(width: 0.05, height: 0.05, length: 0.05)]
+    // MARK: - Properties
+    
+    var data = [UUID: Lumen]()
+    var locationManager = CLLocationManager()
+    var currentLocation: String!
+    
+    var isGiving: Bool!
+    
+    var ref: DatabaseReference = Database.database().reference()
+    var castLantern: Lumen!
+    let sceneView =  ARSCNView()
+    let detailView = DetailView()
+    let sprites = [UIImage(named: "sprite1"),
+                   UIImage(named: "sprite2"),
+                   UIImage(named: "sprite3")]
     
     // MARK: - View Controller Lifecycle
     
@@ -27,11 +37,35 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
         super.viewDidLoad()
         setupScene()
         setupRecognizers()
+        setupSubviews()
+        getLocation()
+    }
+    
+    func getLocation() {
+        locationManager.requestWhenInUseAuthorization()
+        if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
+            CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways){
+            print(locationManager.location!)
+            
+            let geocoder = CLGeocoder()
+            geocoder.reverseGeocodeLocation(locationManager.location!) { (placemarks, error) in
+                self.currentLocation = placemarks?.first?.locality
+                print(self.currentLocation)
+                
+                if self.isGiving {
+                    self.setupLumenCast()
+                } else {
+                    self.bindDataObserver()
+                }
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupSession()
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -44,6 +78,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
     // MARK: - Setup Methods
     
     func setupScene() {
+        view.addSubview(sceneView)
+        sceneView.anchor(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
         // Setup the ARSCNViewDelegate - this gives us callbacks to handle new
         // geometry creation
         self.sceneView.delegate = self
@@ -62,7 +99,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
 
         // Set the scene to the view
         self.sceneView.scene = scene
-        sceneView.isPlaying = true
+        self.sceneView.isPlaying = true
+        self.sceneView.scene.physicsWorld.gravity = SCNVector3Make(0.0, 0.0, 0.0)
     }
     
     func setupSession() {
@@ -82,58 +120,157 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapFrom))
         tapGestureRecognizer.numberOfTapsRequired = 1
         self.sceneView.addGestureRecognizer(tapGestureRecognizer)
+        
+        let swipeUpGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeUp))
+        swipeUpGesture.direction = .up
+        self.sceneView.addGestureRecognizer(swipeUpGesture)
     }
     
-    // MARK: - Tap Handling Callbacks
-    @objc func handleTapFrom(recognizer: UITapGestureRecognizer) {
-        generateParticles()
+    func setupSubviews() {
+        self.view.addSubview(detailView)
+        hideDetails()
+        detailView.anchor(self.view.topAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        let infoIcon: UIButton = {
+            let view = UIButton()
+            view.setImage(UIImage(named: "info"), for: .normal)
+            view.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
+            return view
+        }()
+        
+        self.view.addSubview(infoIcon)
+        infoIcon.anchor(self.view.topAnchor, left: nil, bottom: nil, right: self.view.rightAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 12, widthConstant: 0, heightConstant: 0)
     }
     
-    func generateParticles() {
-        print("Generating particles...")
-
-        self.sceneView.scene.physicsWorld.gravity = SCNVector3Make(0.0, 0.0, 0.0)
-        
-        var angle: Float = 0.0
-        let angleInc: Float = Float.pi / Float(geometries.count)
-        
-        for _ in 0 ..< geometries.count {
-            let radius: Float = Float.random(min: 1.0, max: 2.5)
-            let phi: Float = Float.random(min: 0.5, max: 5)
-            let theta: Float = Float.random(min: 0.5, max: 5)
+    func bindDataObserver() {
+        self.ref.child(self.currentLocation).observe(.value) { (snapshot) in
+            guard let value = snapshot.value as? NSDictionary else { return }
             
-            let size = Float.random(min: 0.25, max: 0.5)
-            let parentOrb = SCNPlane(width:CGFloat(size), height: CGFloat(size))
-            let billboard = SCNBillboardConstraint()
-            billboard.freeAxes = SCNBillboardAxis.all
-
-            let node = SCNNode(geometry: parentOrb)
-            node.constraints = [billboard]
-            let img = UIImage(named: "Untitled")
-            parentOrb.firstMaterial?.diffuse.contents = img
-
-            let displacement: Float = 0.025
-            let up = SCNAction.moveBy(x: 0.0, y: CGFloat(displacement), z: 0.0, duration: 5.0)
-            let down = SCNAction.moveBy(x: 0.0, y: CGFloat(-displacement), z: 0.0, duration: 5.0)
-
-            let oscillation = SCNAction.repeatForever(SCNAction.sequence([up, down]))
-            let rotation = SCNAction.repeatForever(SCNAction.rotateBy(x: 1, y: 1, z: 1, duration: 10))
-            let actions = SCNAction.group([oscillation, rotation])
-
-            node.runAction(actions)
-            node.scale = SCNVector3Make(0.5, 0.5, 0.5)
-            node.position = SCNVector3Make(
-                radius * sin(theta) * cos(phi),
-                radius * sin(theta) * sin(phi),
-                radius * cos(theta)
-            )
-
-            self.sceneView.scene.rootNode.addChildNode(node)
-            angle += angleInc
+            // print(value!["-Kvw_J0XG04UV4fiGMWj"]!)
+            
+            for (id, object) in value {
+                let node = self.sceneView.scene.rootNode.childNode(withName: id as! String, recursively: true)
+                
+                if node == nil {
+                    self.generateLumen(id: id as! String)
+                }
+            }
         }
     }
     
+    // MARK: - Tap Handling Callbacks
+    
+    @objc func handleTapFrom(recognizer: UITapGestureRecognizer) {
+        let result = self.sceneView.hitTest(recognizer.location(in: self.sceneView), options: [SCNHitTestOption.sortResults : true])
+        
+        print(result.description)
+        if isGiving {
+            self.ref.child(self.currentLocation).childByAutoId().setValue([
+                "username": "prayash",
+                "donation": "$20",
+                "message": "One love."
+            ])
+        } else {
+
+        }
+    
+//        if !result.isEmpty {
+//            displayDetails()
+//        } else {
+//            detailView.isHidden = true
+//        }
+    }
+    
+    @objc func handleSwipeUp(recognizer: UITapGestureRecognizer) {
+        print("Casting lumen!")
+        
+        self.ref.child(self.currentLocation).childByAutoId().setValue([
+            "username": "prayash",
+            "donation": "$20",
+            "message": "One love."
+        ])
+        
+        castLantern.moveUpAndDisappear()
+    }
+    
+    func displayDetails() {
+        detailView.isHidden = false
+    }
+    
+    func hideDetails() {
+        detailView.isHidden = true
+    }
+    
+    func setupLumenCast() {
+        print("Preparing Lumen for casting")
+        castLantern = Lumen(
+            id: "cast1",
+            position: SCNVector3Make(
+                0,
+                0.025,
+                -0.75
+            ),
+            size: CGFloat(0.25)
+        )
+        self.sceneView.scene.rootNode.addChildNode(castLantern)
+    }
+    
+    func generateLumen(id: String) {
+        print("Generating lumen... " + id)
+        
+        let lantern = Lumen(
+            id: id,
+            position: SCNVector3Make(
+                Float.random(min: -1.3, max: 0.75),
+                Float.random(min: -1.3, max: 0.75),
+                Float.random(min: -2.5, max: 0.0)
+            ),
+            size: CGFloat(0.125)
+        )
+        self.sceneView.scene.rootNode.addChildNode(lantern)
+        
+//        var angle: Float = 0.0
+//        let angleInc: Float = Float.pi / Float(sprites.count)
+//
+//        for i in 0 ..< sprites.count {
+//            let radius: Float = Float.random(min: 1.0, max: 2.5)
+//            let phi: Float = Float.random(min: 0.5, max: 5)
+//            let theta: Float = Float.random(min: 0.5, max: 5)
+//
+//            let size = Float.random(min: 0.125, max: 0.15)
+//            let parentOrb = SCNPlane(width: CGFloat(size), height: CGFloat(size))
+//            let billboard = SCNBillboardConstraint()
+//            billboard.freeAxes = SCNBillboardAxis.all
+//
+//            node = SCNNode(geometry: parentOrb)
+//            node.constraints = [billboard]
+//            node.name = "HELLO Paul"
+//            let img = sprites[0]
+//            parentOrb.firstMaterial?.diffuse.contents = img
+//
+//            let displacement: Float = 5.0
+//            let up = SCNAction.moveBy(x: 0.0, y: CGFloat(displacement), z: 0.0, duration: 5.0)
+//            let down = SCNAction.moveBy(x: 0.0, y: CGFloat(displacement), z: 0.0, duration: 5.0)
+//
+//            let oscillation = SCNAction.repeatForever(SCNAction.sequence([up, down]))
+//            let rotation = SCNAction.repeatForever(SCNAction.rotateBy(x: 1, y: 1, z: 1, duration: 10))
+//            let actions = SCNAction.group([oscillation, rotation])
+//
+//            node.runAction(actions)
+//            node.scale = SCNVector3Make(0.5, 0.5, 0.5)
+//            node.position = SCNVector3Make(
+//                Float.random(min: 0.1, max: 0.2),
+//                Float.random(min: 0.1, max: 0.2),
+//                -1.5
+//            )
+//
+//            self.sceneView.scene.rootNode.addChildNode(node)
+//            angle += angleInc
+//        }
+    }
+    
     // MARK: - Renderer Delegate Methods
+    
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         
     }
@@ -163,26 +300,22 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
-        
+        resetTracking()
     }
     
     func sessionWasInterrupted(_ session: ARSession) {
         // Inform the user that the session has been interrupted, for example, by presenting an overlay
-        
+        resetTracking()
     }
     
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
-        
+        resetTracking()
     }
     
-    func nodeWithFile(path: String) -> SCNNode {
-        if let scene = SCNScene(named: path) {
-            let node = scene.rootNode.childNodes[0] as SCNNode
-            return node
-        } else {
-            print("Invalid path supplied")
-            return SCNNode()
-        }
+    private func resetTracking() {
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = .horizontal
+        sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
     }
 }
