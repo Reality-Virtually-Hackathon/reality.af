@@ -9,21 +9,22 @@
 import UIKit
 import ARKit
 import SceneKit
+import Firebase
+import FirebaseDatabase
 
 class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDelegate, UIGestureRecognizerDelegate {
-
-    let sceneView: ARSCNView = {
-        let view = ARSCNView()
-        return view
-    }()
     
-    var detailView = DetailView()
-    var sprites = [UIImage(named: "sprite1"),
+    // MARK: - Properties
+    
+    var ref: DatabaseReference = Database.database().reference()
+    var node: SCNNode! = nil
+    let isGiving = false
+    let location = "Cambridge,MA"
+    let sceneView =  ARSCNView()
+    let detailView = DetailView()
+    let sprites = [UIImage(named: "sprite1"),
                    UIImage(named: "sprite2"),
-                   UIImage(named: "sprite3"),
-                   UIImage(named: "sprite4"),
-                   UIImage(named: "sprite5"),
-                   UIImage(named: "sprite6")]
+                   UIImage(named: "sprite3")]
     
     // MARK: - View Controller Lifecycle
     
@@ -32,6 +33,12 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
         setupScene()
         setupRecognizers()
         setupSubviews()
+        
+        self.ref.observe(.value) { snapshot in
+            for child in snapshot.children {
+                print(child)
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -113,11 +120,19 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
     
     // MARK: - Tap Handling Callbacks
     @objc func handleTapFrom(recognizer: UITapGestureRecognizer) {
-        generateParticles()
-        
         let result = self.sceneView.hitTest(recognizer.location(in: self.sceneView), options: [SCNHitTestOption.sortResults : true])
         
         print(result.description)
+        
+        if isGiving {
+            let uuid = UUID().uuidString
+            self.ref.child("Cambridge,MA").child(uuid).setValue([
+                "username": "prayash",
+                "donation": "$20",
+                "message": "One love."
+            ])
+        }
+        
 //        if !result.isEmpty {
 //            displayDetails()
 //        } else {
@@ -133,31 +148,31 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
         detailView.isHidden = true
     }
     
-    func generateParticles() {
-        print("Generating particles...")
+    func generateLantern() {
+        print("Generating lantern...")
         
         var angle: Float = 0.0
         let angleInc: Float = Float.pi / Float(sprites.count)
         
-        for i in 0 ..< sprites.count {
+//        for i in 0 ..< sprites.count {
             let radius: Float = Float.random(min: 1.0, max: 2.5)
             let phi: Float = Float.random(min: 0.5, max: 5)
             let theta: Float = Float.random(min: 0.5, max: 5)
             
-            let size = Float.random(min: 0.01, max: 0.15)
+            let size = Float.random(min: 0.125, max: 0.15)
             let parentOrb = SCNPlane(width: CGFloat(size), height: CGFloat(size))
             let billboard = SCNBillboardConstraint()
             billboard.freeAxes = SCNBillboardAxis.all
 
-            let node = SCNNode(geometry: parentOrb)
+            node = SCNNode(geometry: parentOrb)
             node.constraints = [billboard]
             node.name = "HELLO Paul"
-            let img = sprites[i]
+            let img = sprites[0]
             parentOrb.firstMaterial?.diffuse.contents = img
 
-            let displacement: Float = 0.025
+            let displacement: Float = 10.0
             let up = SCNAction.moveBy(x: 0.0, y: CGFloat(displacement), z: 0.0, duration: 5.0)
-            let down = SCNAction.moveBy(x: 0.0, y: CGFloat(-displacement), z: 0.0, duration: 5.0)
+            let down = SCNAction.moveBy(x: 0.0, y: CGFloat(displacement), z: 0.0, duration: 5.0)
 
             let oscillation = SCNAction.repeatForever(SCNAction.sequence([up, down]))
             let rotation = SCNAction.repeatForever(SCNAction.rotateBy(x: 1, y: 1, z: 1, duration: 10))
@@ -165,15 +180,11 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
 
             node.runAction(actions)
             node.scale = SCNVector3Make(0.5, 0.5, 0.5)
-            node.position = SCNVector3Make(
-                radius * sin(theta) * cos(phi),
-                radius * sin(theta) * sin(phi),
-                radius * cos(theta)
-            )
+            node.position = SCNVector3Make(0, 0, -2.5)
 
             self.sceneView.scene.rootNode.addChildNode(node)
             angle += angleInc
-        }
+//        }
     }
     
     // MARK: - Renderer Delegate Methods
