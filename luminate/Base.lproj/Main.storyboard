@@ -12,7 +12,7 @@
         <scene sceneID="tXr-a1-R10">
             <objects>
                 <viewController storyboardIdentifier="ARScene" title="View Controller Scene" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BV1-FR-VrT" customClass="ARViewController" customModule="luminate" customModuleProvider="target" sceneMemberID="viewController">
-                    <arscnView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="BrB-h1-WRS">
+                    <arscnView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" id="BrB-h1-WRS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </arscnView>
