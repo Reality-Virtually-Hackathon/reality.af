@@ -24,7 +24,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
     let isGiving = false
     
     var ref: DatabaseReference = Database.database().reference()
-    var node: SCNNode!
+    var castLantern: Lumen!
     let sceneView =  ARSCNView()
     let detailView = DetailView()
     let sprites = [UIImage(named: "sprite1"),
@@ -55,15 +55,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
                 if self.isGiving {
                     self.setupLumenCast()
                 } else {
-                    self.ref.child(self.currentLocation).observe(.value) { (snapshot) in
-                        let value = snapshot.value as? NSDictionary
-                        
-//                        print(value!["-Kvw_J0XG04UV4fiGMWj"]!)
-                        
-                        for (id, object) in value! {
-                            self.generateLumen(id: id as! String)
-                        }
-                    }
+                    self.bindDataObserver()
                 }
             }
         }
@@ -128,6 +120,10 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapFrom))
         tapGestureRecognizer.numberOfTapsRequired = 1
         self.sceneView.addGestureRecognizer(tapGestureRecognizer)
+        
+        let swipeUpGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeUp))
+        swipeUpGesture.direction = .up
+        self.sceneView.addGestureRecognizer(swipeUpGesture)
     }
     
     func setupSubviews() {
@@ -144,6 +140,22 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
         
         self.view.addSubview(infoIcon)
         infoIcon.anchor(self.view.topAnchor, left: nil, bottom: nil, right: self.view.rightAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 12, widthConstant: 0, heightConstant: 0)
+    }
+    
+    func bindDataObserver() {
+        self.ref.child(self.currentLocation).observe(.value) { (snapshot) in
+            guard let value = snapshot.value as? NSDictionary else { return }
+            
+            // print(value!["-Kvw_J0XG04UV4fiGMWj"]!)
+            
+            for (id, object) in value {
+                let node = self.sceneView.scene.rootNode.childNode(withName: id as! String, recursively: true)
+                
+                if node == nil {
+                    self.generateLumen(id: id as! String)
+                }
+            }
+        }
     }
     
     // MARK: - Tap Handling Callbacks
@@ -169,6 +181,18 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
 //        }
     }
     
+    @objc func handleSwipeUp(recognizer: UITapGestureRecognizer) {
+        print("Casting lumen!")
+        
+        self.ref.child(self.currentLocation).childByAutoId().setValue([
+            "username": "prayash",
+            "donation": "$20",
+            "message": "One love."
+        ])
+        
+        castLantern.moveUpAndDisappear()
+    }
+    
     func displayDetails() {
         detailView.isHidden = false
     }
@@ -179,15 +203,16 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
     
     func setupLumenCast() {
         print("Preparing Lumen for casting")
-        let lantern = Lumen(
+        castLantern = Lumen(
             id: "cast1",
             position: SCNVector3Make(
-                Float.random(min: -1.3, max: 0.75),
-                Float.random(min: -1.3, max: 0.75),
-                Float.random(min: -2.5, max: 0.0)
-            )
+                0,
+                0.025,
+                -0.75
+            ),
+            size: CGFloat(0.25)
         )
-        self.sceneView.scene.rootNode.addChildNode(lantern)
+        self.sceneView.scene.rootNode.addChildNode(castLantern)
     }
     
     func generateLumen(id: String) {
@@ -199,7 +224,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
                 Float.random(min: -1.3, max: 0.75),
                 Float.random(min: -1.3, max: 0.75),
                 Float.random(min: -2.5, max: 0.0)
-            )
+            ),
+            size: CGFloat(0.125)
         )
         self.sceneView.scene.rootNode.addChildNode(lantern)
         

@@ -10,15 +10,14 @@ import SceneKit
 
 class Lumen: SCNNode {
     
-    let size = Float.random(min: 0.125, max: 0.15)
     let sprites = [UIImage(named: "sprite1"),
                    UIImage(named: "sprite2"),
                    UIImage(named: "sprite3")]
     
-    init(id: String, position: SCNVector3) {
+    init(id: String, position: SCNVector3, size: CGFloat ) {
         super.init()
         
-        let orb = SCNPlane(width: CGFloat(size), height: CGFloat(size))
+        let orb = SCNPlane(width: size, height: size)
         let billboard = SCNBillboardConstraint()
         billboard.freeAxes = SCNBillboardAxis.all
         
@@ -39,6 +38,14 @@ class Lumen: SCNNode {
         
         node.runAction(actions)
         addChildNode(node)
+    }
+    
+    func moveUpAndDisappear() {
+        let moveUp = SCNAction.moveBy(x: 0.0, y: 5.0, z: 0.0, duration: 5.0)
+        let fade = SCNAction.fadeOut(duration: 3.0)
+        let actions = SCNAction.group([moveUp, fade])
+        
+        self.runAction(actions)
     }
     
     required init?(coder aDecoder: NSCoder) {
