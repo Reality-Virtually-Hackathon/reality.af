@@ -6,7 +6,7 @@
 //  Copyright © 2017 com.reality.af. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 // MARK: Float Extension
 

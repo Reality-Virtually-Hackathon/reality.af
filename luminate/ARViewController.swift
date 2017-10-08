@@ -9,6 +9,7 @@
 import UIKit
 import ARKit
 import SceneKit
+import CoreLocation
 import Firebase
 import FirebaseDatabase
 
@@ -16,10 +17,14 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
     
     // MARK: - Properties
     
-    var ref: DatabaseReference = Database.database().reference()
-    var node: SCNNode! = nil
+    var data = [UUID: Lumen]()
+    var locationManager = CLLocationManager()
+    var currentLocation: String!
+    
     let isGiving = false
-    let location = "Cambridge,MA"
+    
+    var ref: DatabaseReference = Database.database().reference()
+    var node: SCNNode!
     let sceneView =  ARSCNView()
     let detailView = DetailView()
     let sprites = [UIImage(named: "sprite1"),
@@ -33,10 +38,33 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
         setupScene()
         setupRecognizers()
         setupSubviews()
-        
-        self.ref.observe(.value) { snapshot in
-            for child in snapshot.children {
-                print(child)
+        getLocation()
+    }
+    
+    func getLocation() {
+        locationManager.requestWhenInUseAuthorization()
+        if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
+            CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways){
+            print(locationManager.location!)
+            
+            let geocoder = CLGeocoder()
+            geocoder.reverseGeocodeLocation(locationManager.location!) { (placemarks, error) in
+                self.currentLocation = placemarks?.first?.locality
+                print(self.currentLocation)
+                
+                if self.isGiving {
+                    self.setupLumenCast()
+                } else {
+                    self.ref.child(self.currentLocation).observe(.value) { (snapshot) in
+                        let value = snapshot.value as? NSDictionary
+                        
+//                        print(value!["-Kvw_J0XG04UV4fiGMWj"]!)
+                        
+                        for (id, object) in value! {
+                            self.generateLumen(id: id as! String)
+                        }
+                    }
+                }
             }
         }
     }
@@ -119,20 +147,21 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
     }
     
     // MARK: - Tap Handling Callbacks
+    
     @objc func handleTapFrom(recognizer: UITapGestureRecognizer) {
         let result = self.sceneView.hitTest(recognizer.location(in: self.sceneView), options: [SCNHitTestOption.sortResults : true])
         
         print(result.description)
-        
-        if isGiving {
-            let uuid = UUID().uuidString
-            self.ref.child("Cambridge,MA").child(uuid).setValue([
+//        if isGiving {
+            self.ref.child(self.currentLocation).childByAutoId().setValue([
                 "username": "prayash",
                 "donation": "$20",
                 "message": "One love."
             ])
-        }
-        
+//        } else {
+//
+//        }
+    
 //        if !result.isEmpty {
 //            displayDetails()
 //        } else {
@@ -148,46 +177,74 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
         detailView.isHidden = true
     }
     
-    func generateLantern() {
-        print("Generating lantern...")
+    func setupLumenCast() {
+        print("Preparing Lumen for casting")
+        let lantern = Lumen(
+            id: "cast1",
+            position: SCNVector3Make(
+                Float.random(min: -1.3, max: 0.75),
+                Float.random(min: -1.3, max: 0.75),
+                Float.random(min: -2.5, max: 0.0)
+            )
+        )
+        self.sceneView.scene.rootNode.addChildNode(lantern)
+    }
+    
+    func generateLumen(id: String) {
+        print("Generating lumen... " + id)
         
-        var angle: Float = 0.0
-        let angleInc: Float = Float.pi / Float(sprites.count)
+        let lantern = Lumen(
+            id: id,
+            position: SCNVector3Make(
+                Float.random(min: -1.3, max: 0.75),
+                Float.random(min: -1.3, max: 0.75),
+                Float.random(min: -2.5, max: 0.0)
+            )
+        )
+        self.sceneView.scene.rootNode.addChildNode(lantern)
         
+//        var angle: Float = 0.0
+//        let angleInc: Float = Float.pi / Float(sprites.count)
+//
 //        for i in 0 ..< sprites.count {
-            let radius: Float = Float.random(min: 1.0, max: 2.5)
-            let phi: Float = Float.random(min: 0.5, max: 5)
-            let theta: Float = Float.random(min: 0.5, max: 5)
-            
-            let size = Float.random(min: 0.125, max: 0.15)
-            let parentOrb = SCNPlane(width: CGFloat(size), height: CGFloat(size))
-            let billboard = SCNBillboardConstraint()
-            billboard.freeAxes = SCNBillboardAxis.all
-
-            node = SCNNode(geometry: parentOrb)
-            node.constraints = [billboard]
-            node.name = "HELLO Paul"
-            let img = sprites[0]
-            parentOrb.firstMaterial?.diffuse.contents = img
-
-            let displacement: Float = 10.0
-            let up = SCNAction.moveBy(x: 0.0, y: CGFloat(displacement), z: 0.0, duration: 5.0)
-            let down = SCNAction.moveBy(x: 0.0, y: CGFloat(displacement), z: 0.0, duration: 5.0)
-
-            let oscillation = SCNAction.repeatForever(SCNAction.sequence([up, down]))
-            let rotation = SCNAction.repeatForever(SCNAction.rotateBy(x: 1, y: 1, z: 1, duration: 10))
-            let actions = SCNAction.group([oscillation, rotation])
-
-            node.runAction(actions)
-            node.scale = SCNVector3Make(0.5, 0.5, 0.5)
-            node.position = SCNVector3Make(0, 0, -2.5)
-
-            self.sceneView.scene.rootNode.addChildNode(node)
-            angle += angleInc
+//            let radius: Float = Float.random(min: 1.0, max: 2.5)
+//            let phi: Float = Float.random(min: 0.5, max: 5)
+//            let theta: Float = Float.random(min: 0.5, max: 5)
+//
+//            let size = Float.random(min: 0.125, max: 0.15)
+//            let parentOrb = SCNPlane(width: CGFloat(size), height: CGFloat(size))
+//            let billboard = SCNBillboardConstraint()
+//            billboard.freeAxes = SCNBillboardAxis.all
+//
+//            node = SCNNode(geometry: parentOrb)
+//            node.constraints = [billboard]
+//            node.name = "HELLO Paul"
+//            let img = sprites[0]
+//            parentOrb.firstMaterial?.diffuse.contents = img
+//
+//            let displacement: Float = 5.0
+//            let up = SCNAction.moveBy(x: 0.0, y: CGFloat(displacement), z: 0.0, duration: 5.0)
+//            let down = SCNAction.moveBy(x: 0.0, y: CGFloat(displacement), z: 0.0, duration: 5.0)
+//
+//            let oscillation = SCNAction.repeatForever(SCNAction.sequence([up, down]))
+//            let rotation = SCNAction.repeatForever(SCNAction.rotateBy(x: 1, y: 1, z: 1, duration: 10))
+//            let actions = SCNAction.group([oscillation, rotation])
+//
+//            node.runAction(actions)
+//            node.scale = SCNVector3Make(0.5, 0.5, 0.5)
+//            node.position = SCNVector3Make(
+//                Float.random(min: 0.1, max: 0.2),
+//                Float.random(min: 0.1, max: 0.2),
+//                -1.5
+//            )
+//
+//            self.sceneView.scene.rootNode.addChildNode(node)
+//            angle += angleInc
 //        }
     }
     
     // MARK: - Renderer Delegate Methods
+    
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         
     }
