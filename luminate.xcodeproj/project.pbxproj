@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AF272E3B1F89872100254AD1 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF272E3A1F89872100254AD1 /* RoundButton.swift */; };
 		AF272E3D1F898AF600254AD1 /* UIGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF272E3C1F898AF600254AD1 /* UIGradientView.swift */; };
+		AF272E461F8A96D900254AD1 /* TransitionVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF272E451F8A96D900254AD1 /* TransitionVIewController.swift */; };
 		AF9E05B91F88818900BE2B9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9E05B81F88818900BE2B9F /* AppDelegate.swift */; };
 		AF9E05BB1F88818900BE2B9F /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = AF9E05BA1F88818900BE2B9F /* art.scnassets */; };
 		AF9E05BD1F88818900BE2B9F /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9E05BC1F88818900BE2B9F /* ARViewController.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		AF272E3A1F89872100254AD1 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoundButton.swift; path = UIComponents/RoundButton.swift; sourceTree = "<group>"; };
 		AF272E3C1F898AF600254AD1 /* UIGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIGradientView.swift; path = luminate/UIComponents/UIGradientView.swift; sourceTree = "<group>"; };
+		AF272E451F8A96D900254AD1 /* TransitionVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionVIewController.swift; sourceTree = "<group>"; };
 		AF9E05B51F88818900BE2B9F /* luminate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = luminate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF9E05B81F88818900BE2B9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF9E05BA1F88818900BE2B9F /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				AF9E05D11F888F6500BE2B9F /* onboarding.storyboard */,
+				AF272E451F8A96D900254AD1 /* TransitionVIewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 				AF272E3D1F898AF600254AD1 /* UIGradientView.swift in Sources */,
 				C4A490D01F89656900A2528D /* LumenShader.metal in Sources */,
 				AF9E05B91F88818900BE2B9F /* AppDelegate.swift in Sources */,
+				AF272E461F8A96D900254AD1 /* TransitionVIewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
