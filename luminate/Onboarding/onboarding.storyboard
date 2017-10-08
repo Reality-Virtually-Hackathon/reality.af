@@ -39,6 +39,9 @@
                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="gLO-tw-aCm" kind="show" id="D1t-QR-C2R"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PCI-gr-YdT" customClass="RoundButton" customModule="luminate" customModuleProvider="target">
                                 <rect key="frame" x="16" y="517" width="343" height="55"/>
@@ -385,7 +388,7 @@ only light can do that.</string>
                 <viewControllerPlaceholder storyboardName="Main" bundleIdentifier="com.reality.af.luminate" referencedIdentifier="ARScene" id="gLO-tw-aCm" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7RS-g0-xgW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1567" y="623"/>
+            <point key="canvasLocation" x="-455" y="1487"/>
         </scene>
         <!--ExploreViewController-->
         <scene sceneID="gKe-y0-52r">
@@ -443,9 +446,6 @@ only light can do that.</string>
                                         <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <segue destination="gLO-tw-aCm" kind="show" id="mpe-Oz-cu6"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQV-p3-aT9">
                                 <rect key="frame" x="11" y="13" width="44" height="44"/>
