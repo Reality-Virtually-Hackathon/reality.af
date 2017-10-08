@@ -21,8 +21,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ibq-1v-7rT" customClass="RoundButton" customModule="luminate" customModuleProvider="target">
                                 <rect key="frame" x="16" y="592" width="343" height="55"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="acF-v1-KmK"/>
+                                    <constraint firstAttribute="height" constant="55" id="qPC-m2-tEJ"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <color key="tintColor" red="0.031929593530000001" green="0.037363152949999999" blue="0.1177764684" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="EXPLORE">
                                     <color key="titleColor" red="1" green="0.99975087529999995" blue="0.97004324509999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -43,8 +44,9 @@
                                 <rect key="frame" x="16" y="517" width="343" height="55"/>
                                 <color key="backgroundColor" red="0.43670386075973511" green="0.48059192299842834" blue="0.74908602237701416" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="onm-I2-Gzl"/>
+                                    <constraint firstAttribute="height" constant="55" id="fNf-oJ-3UM"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <color key="tintColor" red="0.031929593530000001" green="0.037363152949999999" blue="0.1177764684" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="JOIN A CAUSE">
                                     <color key="titleColor" red="1" green="0.99975087529999995" blue="0.97004324509999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -58,34 +60,34 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orb" translatesAutoresizingMaskIntoConstraints="NO" id="dCg-40-5Yk">
-                                <rect key="frame" x="66" y="158" width="243" height="179"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="179" id="kGT-k4-fUl"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join a global community of lights." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFW-AA-n8S">
-                                <rect key="frame" x="40" y="431" width="294" height="62"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join a global community of lights." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFW-AA-n8S">
+                                <rect key="frame" x="57" y="406" width="261" height="82"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <color key="textColor" red="0.96662144807609762" green="0.99552369597484058" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lumens" translatesAutoresizingMaskIntoConstraints="NO" id="dCg-40-5Yk">
+                                <rect key="frame" x="0.0" y="-9" width="375" height="687"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
-                            <constraint firstItem="ibq-1v-7rT" firstAttribute="top" secondItem="PCI-gr-YdT" secondAttribute="bottom" constant="20" id="4me-qH-7Vn"/>
-                            <constraint firstItem="OFW-AA-n8S" firstAttribute="top" secondItem="dCg-40-5Yk" secondAttribute="bottom" constant="94" id="5Dh-Ap-vYZ"/>
-                            <constraint firstItem="dCg-40-5Yk" firstAttribute="leading" secondItem="xaL-hF-ymi" secondAttribute="leading" constant="66" id="5gb-Gw-NjI"/>
-                            <constraint firstItem="OFW-AA-n8S" firstAttribute="centerX" secondItem="PCI-gr-YdT" secondAttribute="centerX" id="Au8-k3-IrZ"/>
-                            <constraint firstItem="PCI-gr-YdT" firstAttribute="top" secondItem="OFW-AA-n8S" secondAttribute="bottom" constant="24" id="BgR-pu-isi"/>
-                            <constraint firstItem="dCg-40-5Yk" firstAttribute="centerX" secondItem="PCI-gr-YdT" secondAttribute="centerX" id="EnH-ex-IvB"/>
-                            <constraint firstAttribute="bottom" secondItem="ibq-1v-7rT" secondAttribute="bottom" constant="20" symbolic="YES" id="GNu-q9-hr8"/>
-                            <constraint firstItem="PCI-gr-YdT" firstAttribute="trailing" secondItem="bXm-14-dEO" secondAttribute="trailingMargin" id="Rjy-MU-5JJ"/>
-                            <constraint firstItem="PCI-gr-YdT" firstAttribute="trailing" secondItem="ibq-1v-7rT" secondAttribute="trailing" id="VWp-qz-0aA"/>
-                            <constraint firstItem="PCI-gr-YdT" firstAttribute="leading" secondItem="bXm-14-dEO" secondAttribute="leadingMargin" id="gJA-Jh-UTn"/>
-                            <constraint firstItem="PCI-gr-YdT" firstAttribute="leading" secondItem="ibq-1v-7rT" secondAttribute="leading" id="kox-lK-Nke"/>
-                            <constraint firstItem="OFW-AA-n8S" firstAttribute="leading" secondItem="xaL-hF-ymi" secondAttribute="leading" constant="40" id="skp-WS-0eR"/>
-                            <constraint firstItem="dCg-40-5Yk" firstAttribute="top" secondItem="xaL-hF-ymi" secondAttribute="top" constant="138" id="x27-Hq-iNI"/>
+                            <constraint firstItem="PCI-gr-YdT" firstAttribute="leading" secondItem="bXm-14-dEO" secondAttribute="leadingMargin" id="0xf-1B-thc"/>
+                            <constraint firstItem="dCg-40-5Yk" firstAttribute="centerX" secondItem="PCI-gr-YdT" secondAttribute="centerX" id="1Yd-jv-aay"/>
+                            <constraint firstItem="PCI-gr-YdT" firstAttribute="leading" secondItem="ibq-1v-7rT" secondAttribute="leading" id="3QN-Jv-4JO"/>
+                            <constraint firstItem="PCI-gr-YdT" firstAttribute="top" secondItem="OFW-AA-n8S" secondAttribute="bottom" constant="29" id="QKy-Dg-zgr"/>
+                            <constraint firstItem="dCg-40-5Yk" firstAttribute="top" secondItem="bXm-14-dEO" secondAttribute="topMargin" constant="-29" id="S1U-c9-TcM"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="dCg-40-5Yk" secondAttribute="bottom" constant="-11" id="Zfi-gr-3zq"/>
+                            <constraint firstItem="ibq-1v-7rT" firstAttribute="top" secondItem="PCI-gr-YdT" secondAttribute="bottom" constant="20" id="bTY-ru-bJs"/>
+                            <constraint firstAttribute="trailing" secondItem="dCg-40-5Yk" secondAttribute="trailing" id="c6O-EY-b8f"/>
+                            <constraint firstItem="dCg-40-5Yk" firstAttribute="centerX" secondItem="bXm-14-dEO" secondAttribute="centerX" id="cOW-ZO-Q9j"/>
+                            <constraint firstItem="OFW-AA-n8S" firstAttribute="centerX" secondItem="PCI-gr-YdT" secondAttribute="centerX" id="hji-kQ-Oeu"/>
+                            <constraint firstItem="dCg-40-5Yk" firstAttribute="leading" secondItem="bXm-14-dEO" secondAttribute="leading" id="kZJ-SD-f9r"/>
+                            <constraint firstItem="dCg-40-5Yk" firstAttribute="centerY" secondItem="bXm-14-dEO" secondAttribute="centerY" id="l0o-b6-SqH"/>
+                            <constraint firstItem="OFW-AA-n8S" firstAttribute="leading" secondItem="xaL-hF-ymi" secondAttribute="leading" constant="57" id="vKn-rB-Dbm"/>
+                            <constraint firstItem="OFW-AA-n8S" firstAttribute="top" secondItem="xaL-hF-ymi" secondAttribute="top" constant="386" id="vWF-Wh-kgP"/>
+                            <constraint firstItem="PCI-gr-YdT" firstAttribute="trailing" secondItem="ibq-1v-7rT" secondAttribute="trailing" id="vZP-Bo-4po"/>
+                            <constraint firstAttribute="bottom" secondItem="ibq-1v-7rT" secondAttribute="bottom" constant="20" symbolic="YES" id="xF4-Xv-G7y"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xaL-hF-ymi"/>
                         <userDefinedRuntimeAttributes>
@@ -111,7 +113,6 @@
         <!--View Controller-->
         <scene sceneID="apW-C9-GO7">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nb1-dn-8UE" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="WelcomeStepThree" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BMc-dZ-Kak" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BXP-Wd-xKY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -144,6 +145,7 @@
                         <viewLayoutGuide key="safeArea" id="2fu-om-dcR"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nb1-dn-8UE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="268" y="1079"/>
         </scene>
@@ -157,6 +159,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="orb" width="265" height="265"/>
+        <image name="lumens" width="750" height="1334"/>
     </resources>
 </document>
