@@ -122,10 +122,11 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
     }
     
     func setupRecognizers() {
-        // Single taps insert a new geometry into scene
+        // Single tap to examine the details about a donation orb
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapFrom))
         tapGestureRecognizer.numberOfTapsRequired = 1
         self.sceneView.addGestureRecognizer(tapGestureRecognizer)
+        self.view.addGestureRecognizer(tapGestureRecognizer)
         
         let swipeUpGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeUp))
         swipeUpGesture.direction = .up
@@ -159,22 +160,12 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
     @objc func handleTapFrom(recognizer: UITapGestureRecognizer) {
         let result = self.sceneView.hitTest(recognizer.location(in: self.sceneView), options: [SCNHitTestOption.sortResults : true])
         
-//        print(result.description)
-//        if self.isGiving {
-//            self.ref.child(self.currentLocation).childByAutoId().setValue([
-//                "username": "prayash",
-//                "donation": "$20",
-//                "message": "One love."
-//            ])
-//        } else {
-//
-//        }
     
-//        if !result.isEmpty {
-//            displayDetails()
-//        } else {
-//            detailView.isHidden = true
-//        }
+        if !result.isEmpty {
+            displayDetails()
+        } else {
+            hideDetails()
+        }
     }
     
     @objc func handleSwipeUp(recognizer: UITapGestureRecognizer) {
@@ -190,6 +181,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
     }
     
     func displayDetails() {
+        detailView.content = "Peace and Love from Boulder, CO. 😈"
         detailView.isHidden = false
     }
     

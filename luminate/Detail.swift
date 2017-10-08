@@ -12,6 +12,7 @@ import LBTAComponents
 class DetailView: UIView {
     var textView = UITextView()
     var button = UIButton()
+    var content = String()
     
     override init (frame: CGRect) {
         super.init(frame: frame)
@@ -20,6 +21,7 @@ class DetailView: UIView {
         
         setupGradient()
         setupTextView()
+        setupRecognizers()
     }
     
     convenience init() {
@@ -40,7 +42,7 @@ class DetailView: UIView {
     
     func setupTextView() {
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.text = "Peace and Love from Boulder, CO. 😈"
+        textView.text = self.content
         textView.font = UIFont.boldSystemFont(ofSize: 24)
         textView.textColor = UIColor.white
         textView.backgroundColor = UIColor.clear
@@ -51,6 +53,17 @@ class DetailView: UIView {
         let sizeThatfitsTextView = textView.sizeThatFits(CGSize(width: textView.frame.size.width, height: CGFloat(MAXFLOAT)))
         
         textView.anchor(nil, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 250)
+    }
+    
+    func setupRecognizers() {
+        // Single taps insert a new geometry into scene
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideSelf))
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        self.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc func hideSelf() {
+        self.isHidden = true
     }
     
     required init?(coder aDecoder: NSCoder) {
