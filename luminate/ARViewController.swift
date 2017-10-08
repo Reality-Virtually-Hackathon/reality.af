@@ -12,14 +12,18 @@ import SceneKit
 
 class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDelegate, UIGestureRecognizerDelegate {
 
-    @IBOutlet var sceneView: ARSCNView!
+    let sceneView: ARSCNView = {
+        let view = ARSCNView()
+        return view
+    }()
     
-    var geometries = [SCNSphere(radius: 0.05),
-                      SCNPlane(width: 0.05, height: 0.05),
-                      SCNBox(width: 0.05, height: 0.05, length: 0.05, chamferRadius: 0.0025),
-                      SCNPyramid(width: 0.01, height: 0.01, length: 0.01),
-                      SCNBox(width: 0.25, height: 0.1, length: 0.1, chamferRadius: 0.0),
-                      SCNPyramid(width: 0.05, height: 0.05, length: 0.05)]
+    var detailView = DetailView()
+    var sprites = [UIImage(named: "sprite1"),
+                   UIImage(named: "sprite2"),
+                   UIImage(named: "sprite3"),
+                   UIImage(named: "sprite4"),
+                   UIImage(named: "sprite5"),
+                   UIImage(named: "sprite6")]
     
     // MARK: - View Controller Lifecycle
     
@@ -27,11 +31,14 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
         super.viewDidLoad()
         setupScene()
         setupRecognizers()
+        setupSubviews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupSession()
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -44,6 +51,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
     // MARK: - Setup Methods
     
     func setupScene() {
+        view.addSubview(sceneView)
+        sceneView.anchor(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
         // Setup the ARSCNViewDelegate - this gives us callbacks to handle new
         // geometry creation
         self.sceneView.delegate = self
@@ -62,7 +72,8 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
 
         // Set the scene to the view
         self.sceneView.scene = scene
-        sceneView.isPlaying = true
+        self.sceneView.isPlaying = true
+        self.sceneView.scene.physicsWorld.gravity = SCNVector3Make(0.0, 0.0, 0.0)
     }
     
     func setupSession() {
@@ -84,32 +95,64 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
         self.sceneView.addGestureRecognizer(tapGestureRecognizer)
     }
     
+    func setupSubviews() {
+        self.view.addSubview(detailView)
+        hideDetails()
+        detailView.anchor(self.view.topAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        let infoIcon: UIButton = {
+            let view = UIButton()
+            view.setImage(UIImage(named: "info"), for: .normal)
+            view.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
+            return view
+        }()
+        
+        self.view.addSubview(infoIcon)
+        infoIcon.anchor(self.view.topAnchor, left: nil, bottom: nil, right: self.view.rightAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 12, widthConstant: 0, heightConstant: 0)
+    }
+    
     // MARK: - Tap Handling Callbacks
     @objc func handleTapFrom(recognizer: UITapGestureRecognizer) {
         generateParticles()
+        
+        let result = self.sceneView.hitTest(recognizer.location(in: self.sceneView), options: [SCNHitTestOption.sortResults : true])
+        
+        print(result.description)
+//        if !result.isEmpty {
+//            displayDetails()
+//        } else {
+//            detailView.isHidden = true
+//        }
+    }
+    
+    func displayDetails() {
+        detailView.isHidden = false
+    }
+    
+    func hideDetails() {
+        detailView.isHidden = true
     }
     
     func generateParticles() {
         print("Generating particles...")
-
-        self.sceneView.scene.physicsWorld.gravity = SCNVector3Make(0.0, 0.0, 0.0)
         
         var angle: Float = 0.0
-        let angleInc: Float = Float.pi / Float(geometries.count)
+        let angleInc: Float = Float.pi / Float(sprites.count)
         
-        for _ in 0 ..< geometries.count {
+        for i in 0 ..< sprites.count {
             let radius: Float = Float.random(min: 1.0, max: 2.5)
             let phi: Float = Float.random(min: 0.5, max: 5)
             let theta: Float = Float.random(min: 0.5, max: 5)
             
-            let size = Float.random(min: 0.25, max: 0.5)
-            let parentOrb = SCNPlane(width:CGFloat(size), height: CGFloat(size))
+            let size = Float.random(min: 0.01, max: 0.15)
+            let parentOrb = SCNPlane(width: CGFloat(size), height: CGFloat(size))
             let billboard = SCNBillboardConstraint()
             billboard.freeAxes = SCNBillboardAxis.all
 
             let node = SCNNode(geometry: parentOrb)
             node.constraints = [billboard]
-            let img = UIImage(named: "Untitled")
+            node.name = "HELLO Paul"
+            let img = sprites[i]
             parentOrb.firstMaterial?.diffuse.contents = img
 
             let displacement: Float = 0.025
@@ -163,26 +206,22 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
-        
+        resetTracking()
     }
     
     func sessionWasInterrupted(_ session: ARSession) {
         // Inform the user that the session has been interrupted, for example, by presenting an overlay
-        
+        resetTracking()
     }
     
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
-        
+        resetTracking()
     }
     
-    func nodeWithFile(path: String) -> SCNNode {
-        if let scene = SCNScene(named: path) {
-            let node = scene.rootNode.childNodes[0] as SCNNode
-            return node
-        } else {
-            print("Invalid path supplied")
-            return SCNNode()
-        }
+    private func resetTracking() {
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = .horizontal
+        sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
     }
 }
