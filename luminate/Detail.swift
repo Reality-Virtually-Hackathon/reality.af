@@ -11,8 +11,8 @@ import LBTAComponents
 
 class DetailView: UIView {
     var textView = UITextView()
+    var nameView = UITextView()
     var button = UIButton()
-    var content = String()
     
     override init (frame: CGRect) {
         super.init(frame: frame)
@@ -21,6 +21,7 @@ class DetailView: UIView {
         
         setupGradient()
         setupTextView()
+        setupNameView()
         setupCloseButton()
     }
     
@@ -54,7 +55,6 @@ class DetailView: UIView {
     
     func setupTextView() {
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.text = self.content
         textView.font = UIFont.boldSystemFont(ofSize: 24)
         textView.textColor = UIColor.white
         textView.backgroundColor = UIColor.clear
@@ -62,9 +62,19 @@ class DetailView: UIView {
         textView.textAlignment = .center
         self.addSubview(textView)
         
-        let sizeThatfitsTextView = textView.sizeThatFits(CGSize(width: textView.frame.size.width, height: CGFloat(MAXFLOAT)))
-        
         textView.anchor(nil, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 250)
+    }
+    
+    func setupNameView() {
+        nameView.translatesAutoresizingMaskIntoConstraints = false
+        nameView.font = UIFont.boldSystemFont(ofSize: 24)
+        nameView.textColor = UIColor.white
+        nameView.backgroundColor = UIColor.clear
+        nameView.isEditable = false
+        nameView.textAlignment = .center
+        self.addSubview(nameView)
+        
+        nameView.anchor(nil, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 50)
     }
     
     @objc func hideSelf() {

@@ -31,6 +31,7 @@ class Lumen: SCNNode {
         let img = sprites[0]
         orb.firstMaterial?.diffuse.contents = img
         
+        
         let displacement: Float = 0.5
         let down = SCNAction.moveBy(x: 0.0, y: CGFloat(-displacement), z: 0.0, duration: 5.0)
         let fade = SCNAction.fadeIn(duration: 3.0)
