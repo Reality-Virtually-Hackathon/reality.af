@@ -1,5 +1,5 @@
 //
-//  CastViewController.swift
+//  DonateViewController.swift
 //  luminate
 //
 //  Created by Prayash Thapa on 10/8/17.
@@ -13,8 +13,6 @@ class DonateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
     }
     
     @IBAction func castButtonDidTouch(_ sender: Any) {

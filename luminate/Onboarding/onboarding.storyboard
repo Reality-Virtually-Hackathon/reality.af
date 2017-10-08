@@ -40,7 +40,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="gLO-tw-aCm" kind="show" id="D1t-QR-C2R"/>
+                                    <segue destination="pUG-Hn-3vh" kind="show" id="o7R-yn-lhF"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PCI-gr-YdT" customClass="RoundButton" customModule="luminate" customModuleProvider="target">
@@ -382,18 +382,10 @@ only light can do that.</string>
             </objects>
             <point key="canvasLocation" x="328.80000000000001" y="623.83808095952031"/>
         </scene>
-        <!--ARScene-->
-        <scene sceneID="prE-kn-c19">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Main" bundleIdentifier="com.reality.af.luminate" referencedIdentifier="ARScene" id="gLO-tw-aCm" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7RS-g0-xgW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-455" y="1487"/>
-        </scene>
         <!--ExploreViewController-->
         <scene sceneID="gKe-y0-52r">
             <objects>
-                <viewController storyboardIdentifier="ExlploreOnboardingViewController" title="ExploreViewController" modalTransitionStyle="crossDissolve" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lNn-6e-gZo" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExlploreOnboardingViewController" title="ExploreViewController" modalTransitionStyle="crossDissolve" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lNn-6e-gZo" customClass="ExploreViewController" customModule="luminate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="p6f-xD-EHa" customClass="GradientView" customModule="luminate" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -764,7 +756,7 @@ only light can do that.</string>
                 <viewControllerPlaceholder storyboardName="Main" bundleIdentifier="com.reality.af.luminate" referencedIdentifier="ARScene" id="pUG-Hn-3vh" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nF7-Ni-7S0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4394" y="607"/>
+            <point key="canvasLocation" x="2458" y="1516"/>
         </scene>
         <!--CastLanternExampleViewController-->
         <scene sceneID="QmT-Ho-g5e">
@@ -860,8 +852,9 @@ only light can do that.</string>
         <image name="lumens" width="750" height="1334"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="o7R-yn-lhF"/>
         <segue reference="r9g-lK-xS8"/>
-        <segue reference="iLr-Ea-QA0"/>
+        <segue reference="NQW-lj-2d9"/>
         <segue reference="JGM-6P-axl"/>
         <segue reference="ELl-Ur-vBv"/>
         <segue reference="Ql7-3J-xbV"/>
