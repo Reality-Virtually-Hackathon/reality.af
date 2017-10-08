@@ -21,7 +21,7 @@ class DetailView: UIView {
         
         setupGradient()
         setupTextView()
-        setupRecognizers()
+        setupCloseButton()
     }
     
     convenience init() {
@@ -36,8 +36,20 @@ class DetailView: UIView {
         }()
         
         addSubview(imageView)
-        
         imageView.anchor(self.topAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+    }
+    
+    func setupCloseButton() {
+        let button: UIButton = {
+            let view = UIButton()
+            view.setImage(UIImage(named: "CloseIcon"), for: .normal)
+            return view
+        }()
+        
+         button.addTarget(self, action: #selector(hideSelf), for: .touchUpInside)
+        
+        addSubview(button)
+        button.anchor(self.topAnchor, left: self.leftAnchor, bottom: nil, right: nil, topConstant: 12, leftConstant: 12, bottomConstant: 0, rightConstant: 0, widthConstant: 18, heightConstant: 18)
     }
     
     func setupTextView() {
@@ -53,13 +65,6 @@ class DetailView: UIView {
         let sizeThatfitsTextView = textView.sizeThatFits(CGSize(width: textView.frame.size.width, height: CGFloat(MAXFLOAT)))
         
         textView.anchor(nil, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 250)
-    }
-    
-    func setupRecognizers() {
-        // Single taps insert a new geometry into scene
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideSelf))
-        tapGestureRecognizer.numberOfTapsRequired = 1
-        self.addGestureRecognizer(tapGestureRecognizer)
     }
     
     @objc func hideSelf() {
