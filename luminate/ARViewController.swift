@@ -27,6 +27,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
     var castLantern: Lumen!
     let sceneView =  ARSCNView()
     let detailView = DetailView()
+    let goHomeButtonView = GoHomeButtonView()
     let sprites = [UIImage(named: "sprite1"),
                    UIImage(named: "sprite2"),
                    UIImage(named: "sprite3")]
@@ -135,8 +136,10 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
     
     func setupSubviews() {
         self.view.addSubview(detailView)
+        self.view.addSubview(goHomeButtonView)
         hideDetails()
         detailView.anchor(self.view.topAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        goHomeButtonView.anchor(self.view.topAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
     
     func bindDataObserver() {
