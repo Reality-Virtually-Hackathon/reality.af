@@ -21,6 +21,8 @@
 		C492C0931F8AA5B1003E54DC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C492C0921F8AA5AD003E54DC /* GoogleService-Info.plist */; };
 		C492C0951F8AAD81003E54DC /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492C0941F8AAD81003E54DC /* ExploreViewController.swift */; };
 		C49358951F8DB257008A114E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49358941F8DB257008A114E /* HomeViewController.swift */; };
+		C493589B1F8DB555008A114E /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = C493589A1F8DB555008A114E /* Service.swift */; };
+		C493589D1F8DB586008A114E /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = C493589C1F8DB586008A114E /* Point.swift */; };
 		C4A490D01F89656900A2528D /* LumenShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = C4A490CF1F89656900A2528D /* LumenShader.metal */; };
 		C4DB32CF1F8AA29500C12293 /* DonateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DB32CE1F8AA29500C12293 /* DonateViewController.swift */; };
 		C4DB32D21F8AA43900C12293 /* Lumen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DB32D01F8AA43900C12293 /* Lumen.swift */; };
@@ -31,8 +33,8 @@
 /* Begin PBXFileReference section */
 		42B7AFEF65CF772FBFA12983 /* Pods_luminate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_luminate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74727A62C81189FE9EA5899B /* Pods-luminate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-luminate.release.xcconfig"; path = "Pods/Target Support Files/Pods-luminate/Pods-luminate.release.xcconfig"; sourceTree = "<group>"; };
-		AF272E3A1F89872100254AD1 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoundButton.swift; path = UIComponents/RoundButton.swift; sourceTree = "<group>"; };
-		AF272E3C1F898AF600254AD1 /* UIGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIGradientView.swift; path = luminate/UIComponents/UIGradientView.swift; sourceTree = "<group>"; };
+		AF272E3A1F89872100254AD1 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		AF272E3C1F898AF600254AD1 /* UIGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGradientView.swift; sourceTree = "<group>"; };
 		AF272E451F8A96D900254AD1 /* TransitionVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionVIewController.swift; sourceTree = "<group>"; };
 		AF9E05B51F88818900BE2B9F /* luminate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = luminate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF9E05B81F88818900BE2B9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +49,8 @@
 		C492C0921F8AA5AD003E54DC /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C492C0941F8AAD81003E54DC /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		C49358941F8DB257008A114E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		C493589A1F8DB555008A114E /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		C493589C1F8DB586008A114E /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		C4A490CF1F89656900A2528D /* LumenShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = LumenShader.metal; sourceTree = "<group>"; };
 		C4DB32CE1F8AA29500C12293 /* DonateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateViewController.swift; sourceTree = "<group>"; };
 		C4DB32D01F8AA43900C12293 /* Lumen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lumen.swift; sourceTree = "<group>"; };
@@ -86,7 +90,6 @@
 		AF9E05AC1F88818900BE2B9F = {
 			isa = PBXGroup;
 			children = (
-				AF272E3C1F898AF600254AD1 /* UIGradientView.swift */,
 				AF9E05B71F88818900BE2B9F /* luminate */,
 				C492C0921F8AA5AD003E54DC /* GoogleService-Info.plist */,
 				AF9E05B61F88818900BE2B9F /* Products */,
@@ -107,19 +110,18 @@
 			isa = PBXGroup;
 			children = (
 				AF9E05B81F88818900BE2B9F /* AppDelegate.swift */,
-				C49358941F8DB257008A114E /* HomeViewController.swift */,
 				C42ECC281F89267D00A55B2C /* Extensions.swift */,
+				C49358991F8DB54B008A114E /* Service */,
+				C49358961F8DB460008A114E /* Model */,
+				C49358981F8DB4CF008A114E /* Controller */,
 				AF9E05CE1F888CA400BE2B9F /* Onboarding */,
-				C4DB32D11F8AA43900C12293 /* ARViewController.swift */,
-				C4DB32D01F8AA43900C12293 /* Lumen.swift */,
-				C492C0901F8AA546003E54DC /* Detail.swift */,
+				C49358971F8DB473008A114E /* View */,
 				AF9E05BE1F88818900BE2B9F /* Main.storyboard */,
 				AF9E05C31F88818900BE2B9F /* LaunchScreen.storyboard */,
 				AF9E05BA1F88818900BE2B9F /* art.scnassets */,
 				AF9E05C11F88818900BE2B9F /* Assets.xcassets */,
 				C4A490CF1F89656900A2528D /* LumenShader.metal */,
 				AF9E05C61F88818900BE2B9F /* Info.plist */,
-				AF272E3A1F89872100254AD1 /* RoundButton.swift */,
 			);
 			path = luminate;
 			sourceTree = "<group>";
@@ -133,6 +135,43 @@
 				C492C0941F8AAD81003E54DC /* ExploreViewController.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		C49358961F8DB460008A114E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C493589C1F8DB586008A114E /* Point.swift */,
+			);
+			name = Model;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		C49358971F8DB473008A114E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AF272E3C1F898AF600254AD1 /* UIGradientView.swift */,
+				AF272E3A1F89872100254AD1 /* RoundButton.swift */,
+				C4DB32D01F8AA43900C12293 /* Lumen.swift */,
+				C492C0901F8AA546003E54DC /* Detail.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C49358981F8DB4CF008A114E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C4DB32D11F8AA43900C12293 /* ARViewController.swift */,
+				C49358941F8DB257008A114E /* HomeViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C49358991F8DB54B008A114E /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				C493589A1F8DB555008A114E /* Service.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,8 +313,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF272E3B1F89872100254AD1 /* RoundButton.swift in Sources */,
+				C493589B1F8DB555008A114E /* Service.swift in Sources */,
 				C42ECC291F89267D00A55B2C /* Extensions.swift in Sources */,
 				AF272E3D1F898AF600254AD1 /* UIGradientView.swift in Sources */,
+				C493589D1F8DB586008A114E /* Point.swift in Sources */,
 				C4DB32D31F8AA43900C12293 /* ARViewController.swift in Sources */,
 				C4A490D01F89656900A2528D /* LumenShader.metal in Sources */,
 				C4DB32CF1F8AA29500C12293 /* DonateViewController.swift in Sources */,
