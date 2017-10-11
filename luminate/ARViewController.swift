@@ -36,6 +36,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, SCNSceneRendererDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupScene()
         setupRecognizers()
         setupSubviews()

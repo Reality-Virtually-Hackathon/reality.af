@@ -14,7 +14,7 @@ class Lumen: SCNNode {
                    UIImage(named: "sprite2"),
                    UIImage(named: "sprite3")]
     
-    init(id: String, position: SCNVector3, size: CGFloat ) {
+    init(id: String, position: SCNVector3, size: CGFloat) {
         super.init()
         
         let orb = SCNPlane(width: size, height: size)

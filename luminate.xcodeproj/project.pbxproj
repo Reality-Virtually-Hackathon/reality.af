@@ -20,6 +20,7 @@
 		C492C0911F8AA546003E54DC /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492C0901F8AA546003E54DC /* Detail.swift */; };
 		C492C0931F8AA5B1003E54DC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C492C0921F8AA5AD003E54DC /* GoogleService-Info.plist */; };
 		C492C0951F8AAD81003E54DC /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492C0941F8AAD81003E54DC /* ExploreViewController.swift */; };
+		C49358951F8DB257008A114E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49358941F8DB257008A114E /* HomeViewController.swift */; };
 		C4A490D01F89656900A2528D /* LumenShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = C4A490CF1F89656900A2528D /* LumenShader.metal */; };
 		C4DB32CF1F8AA29500C12293 /* DonateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DB32CE1F8AA29500C12293 /* DonateViewController.swift */; };
 		C4DB32D21F8AA43900C12293 /* Lumen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DB32D01F8AA43900C12293 /* Lumen.swift */; };
@@ -45,6 +46,7 @@
 		C492C0901F8AA546003E54DC /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
 		C492C0921F8AA5AD003E54DC /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C492C0941F8AAD81003E54DC /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
+		C49358941F8DB257008A114E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C4A490CF1F89656900A2528D /* LumenShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = LumenShader.metal; sourceTree = "<group>"; };
 		C4DB32CE1F8AA29500C12293 /* DonateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateViewController.swift; sourceTree = "<group>"; };
 		C4DB32D01F8AA43900C12293 /* Lumen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lumen.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				AF9E05B81F88818900BE2B9F /* AppDelegate.swift */,
+				C49358941F8DB257008A114E /* HomeViewController.swift */,
 				C42ECC281F89267D00A55B2C /* Extensions.swift */,
 				AF9E05CE1F888CA400BE2B9F /* Onboarding */,
 				C4DB32D11F8AA43900C12293 /* ARViewController.swift */,
@@ -278,6 +281,7 @@
 				C4DB32CF1F8AA29500C12293 /* DonateViewController.swift in Sources */,
 				C492C0911F8AA546003E54DC /* Detail.swift in Sources */,
 				AF9E05B91F88818900BE2B9F /* AppDelegate.swift in Sources */,
+				C49358951F8DB257008A114E /* HomeViewController.swift in Sources */,
 				AF272E461F8A96D900254AD1 /* TransitionVIewController.swift in Sources */,
 				C492C0951F8AAD81003E54DC /* ExploreViewController.swift in Sources */,
 				C4DB32D21F8AA43900C12293 /* Lumen.swift in Sources */,
@@ -420,7 +424,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 746Z8572ND;
+				DEVELOPMENT_TEAM = JZNN87YRMJ;
 				INFOPLIST_FILE = luminate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.reality.af.luminate;
@@ -438,7 +442,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 746Z8572ND;
+				DEVELOPMENT_TEAM = JZNN87YRMJ;
 				INFOPLIST_FILE = luminate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.reality.af.luminate;

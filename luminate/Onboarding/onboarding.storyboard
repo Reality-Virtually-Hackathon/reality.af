@@ -126,7 +126,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eXA-mj-NpP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-455.19999999999999" y="1077.2113943028487"/>
+            <point key="canvasLocation" x="-476" y="602"/>
         </scene>
         <!--MoreInfoVIewController-->
         <scene sceneID="n9b-Ng-oLI">
@@ -274,7 +274,7 @@ only light can do that.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PP3-G0-O4d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="328.80000000000001" y="1363.2683658170915"/>
+            <point key="canvasLocation" x="-516" y="1881"/>
         </scene>
         <!--ExploreViewController-->
         <scene sceneID="gKe-y0-52r">
@@ -745,10 +745,10 @@ only light can do that.</string>
         <image name="lumens" width="750" height="1334"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="o7R-yn-lhF"/>
+        <segue reference="IFH-5D-fcs"/>
         <segue reference="r9g-lK-xS8"/>
-        <segue reference="NQW-lj-2d9"/>
-        <segue reference="P4W-cn-4I0"/>
-        <segue reference="Jpt-fs-6or"/>
+        <segue reference="iLr-Ea-QA0"/>
+        <segue reference="r7q-Ko-7sM"/>
+        <segue reference="Op4-R6-aNg"/>
     </inferredMetricsTieBreakers>
 </document>
